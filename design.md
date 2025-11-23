@@ -1,4 +1,4 @@
-# Orbit (v3.0 Gravity) - Development Design Document
+# Orbit (v1.0 Gravity) - Development Design Document
 
 **Status:** Ready for Development  
 **Target Platform:** macOS (SwiftUI Native)  

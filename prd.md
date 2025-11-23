@@ -1,7 +1,7 @@
 # Product Requirements Document (PRD)
 
 **Product Name:** Orbit (formerly ChillFlow)  
-**Version:** 3.1 (The "Gravity" Update)  
+**Version:** 1.0  
 **Status:** Final Draft  
 **Platform:** macOS (Native SwiftUI)  
 **Language:** English
@@ -168,6 +168,6 @@ To create a digital environment where "getting into the zone" is not a willpower
 
 ## 8. Roadmap
 
-- **v3.0 (Gravity):** Core Menu Bar + Popover release. Includes Timer, Soundscapes, and Basic Heatmap
-- **v3.1 (Mission):** Implementation of Task System and Calendar Integration
-- **v3.5 (Atmosphere):** Full integration of WeatherKit for "Atmospheric Sync" (sound matches local weather)
+- **v1.0 (Gravity):** Core Menu Bar + Popover release. Includes Timer, Soundscapes, and Basic Heatmap
+- **v1.1 (Mission):** Implementation of Task System and Calendar Integration
+- **v1.5 (Atmosphere):** Full integration of WeatherKit for "Atmospheric Sync" (sound matches local weather)
