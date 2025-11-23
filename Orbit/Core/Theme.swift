@@ -3,7 +3,7 @@ import SwiftUI
 // MARK: - Design System
 struct Theme {
     static let width: CGFloat = 340
-    static let height: CGFloat = 600
+    static let height: CGFloat = 400
 
     struct Colors {
         static let background = Color(hex: "121212")

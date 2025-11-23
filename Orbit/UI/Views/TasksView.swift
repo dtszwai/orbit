@@ -100,8 +100,10 @@ struct TasksView: View {
                     }
                 }
                 .padding(.horizontal, 24)
+                .padding(.bottom, 16)
             }
         }
+        .frame(maxHeight: .infinity, alignment: .top)
     }
 
     private func addTask() {
@@ -128,12 +130,24 @@ struct TaskRow: View {
     let task: TaskItem
     @ObservedObject var manager: OrbitManager
     let onDelete: () -> Void
-    @State private var isHovered = false
+    @State private var isRowHovered = false
+    @State private var isPlayHovered = false
+    @State private var isDeleteHovered = false
+    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
         HStack(spacing: 12) {
             // Checkbox
-            Button(action: { withAnimation { task.isCompleted.toggle() }}) {
+            Button(action: {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.6)) {
+                    task.isCompleted.toggle()
+                    do {
+                        try modelContext.save()
+                    } catch {
+                        print("Error saving task completion: \(error)")
+                    }
+                }
+            }) {
                 ZStack {
                     Circle()
                         .stroke(task.isCompleted ? Theme.Colors.teal : Color.white.opacity(0.2), lineWidth: 1.5)
@@ -147,6 +161,8 @@ struct TaskRow: View {
                             .foregroundColor(.black)
                     }
                 }
+                .frame(width: 32, height: 32)
+                .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
 
@@ -165,28 +181,45 @@ struct TaskRow: View {
             // Actions
             HStack(spacing: 4) {
                 if !task.isCompleted {
-                    Button(action: { manager.playTask(task) }) {
-                        Image(systemName: "play.fill")
+                    let isCurrentTask = manager.currentTask?.id == task.id && manager.isRunning
+                    Button(action: {
+                        if isCurrentTask {
+                            manager.toggleTimer()
+                        } else {
+                            manager.playTask(task)
+                        }
+                    }) {
+                        Image(systemName: isCurrentTask ? "pause.fill" : "play.fill")
                             .font(.system(size: 14))
-                            .foregroundColor(Theme.Colors.teal)
+                            .foregroundColor(isPlayHovered ? Theme.Colors.teal : Color.white.opacity(0.4))
                             .frame(width: 32, height: 32)
-                            .background(Theme.Colors.teal.opacity(0.1))
+                            .background(isPlayHovered ? Theme.Colors.teal.opacity(0.15) : Color.white.opacity(0.05))
                             .cornerRadius(8)
                     }
                     .buttonStyle(.plain)
-                    .opacity(isHovered ? 1 : 0)
+                    .opacity(isRowHovered || isCurrentTask ? 1 : 0)
+                    .onHover { hovering in
+                        withAnimation(.easeOut(duration: 0.15)) {
+                            isPlayHovered = hovering
+                        }
+                    }
                 }
 
                 Button(action: onDelete) {
                     Image(systemName: "trash")
                         .font(.system(size: 14))
-                        .foregroundColor(.red.opacity(0.7))
+                        .foregroundColor(isDeleteHovered ? .red : Color.white.opacity(0.4))
                         .frame(width: 32, height: 32)
-                        .background(Color.red.opacity(0.1))
+                        .background(isDeleteHovered ? Color.red.opacity(0.15) : Color.white.opacity(0.05))
                         .cornerRadius(8)
                 }
                 .buttonStyle(.plain)
-                .opacity(isHovered ? 1 : 0)
+                .opacity(isRowHovered ? 1 : 0)
+                .onHover { hovering in
+                    withAnimation(.easeOut(duration: 0.15)) {
+                        isDeleteHovered = hovering
+                    }
+                }
             }
         }
         .padding(12)
@@ -211,7 +244,7 @@ struct TaskRow: View {
         )
         .onHover { hovering in
             withAnimation(.easeOut(duration: 0.2)) {
-                isHovered = hovering
+                isRowHovered = hovering
             }
         }
     }

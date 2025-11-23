@@ -29,7 +29,7 @@ struct OrbitApp: App {
                 .background(Theme.Colors.background)
         } label: {
             // Micro-Orbit (Menu Bar State)
-            HStack {
+            HStack(spacing: 6) {
                 Image(systemName: manager.isRunning ? "leaf.fill" : "leaf")
                     .foregroundColor(manager.isRunning ? Theme.Colors.teal : .primary)
                 if manager.isRunning {
@@ -139,7 +139,7 @@ struct PopoverContentView: View {
                         ))
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         }
         .frame(width: Theme.width, height: Theme.height)
         .background(Theme.Colors.background)

@@ -7,11 +7,14 @@ class OrbitManager: ObservableObject {
     // Timer State
     @Published var timeLeft: TimeInterval = 25 * 60
     @Published var isRunning: Bool = false
+    @Published var isPaused: Bool = false
     @Published var currentTask: TaskItem?
 
     // Audio State
     @Published var activeSoundscape: Soundscape = .focus
     @Published var volume: Double = 0.75
+    @Published var isMuted: Bool = false
+    var volumeBeforeMute: Double = 0.75
 
     // Bio-Rhythm State
     @Published var energyStatus: String = "Calculating..."
@@ -62,6 +65,16 @@ class OrbitManager: ObservableObject {
     }
     
     // MARK: - Timer Logic
+    var defaultDuration: TimeInterval {
+        return 25 * 60
+    }
+
+    func setDuration(minutes: Int) {
+        if !isRunning {
+            timeLeft = TimeInterval(minutes * 60)
+        }
+    }
+
     func toggleTimer() {
         if isRunning {
             pauseTimer()
@@ -74,12 +87,14 @@ class OrbitManager: ObservableObject {
         if isRunning {
             pauseTimer()
         }
-        timeLeft = 25 * 60 // Reset to default
+        timeLeft = defaultDuration // Reset to default
         currentTask = nil
+        isPaused = false
     }
-    
+
     private func startTimer() {
         isRunning = true
+        isPaused = false
         sessionStartTime = Date()
         timerCancellable = Timer.publish(every: 1, on: .main, in: .common)
             .autoconnect()
@@ -96,6 +111,7 @@ class OrbitManager: ObservableObject {
 
     private func pauseTimer() {
         isRunning = false
+        isPaused = true
         timerCancellable?.cancel()
 
         // Save session if at least 1 minute was completed
@@ -112,6 +128,7 @@ class OrbitManager: ObservableObject {
     private func finishSession() {
         pauseTimer()
         timeLeft = 25 * 60 // Reset
+        isPaused = false
     }
 
     private func saveSession(durationSeconds: Int) {

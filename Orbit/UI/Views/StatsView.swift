@@ -114,27 +114,27 @@ struct StatsView: View {
                 .padding(.top, 8)
             }
             .padding(.horizontal, 24)
+            .padding(.bottom, 24)
 
-            // Time Period Breakdown
-            HStack(spacing: 0) {
-                ForEach(["Morning", "Afternoon", "Evening"], id: \.self) { period in
-                    VStack(spacing: 6) {
-                        Text(period)
-                            .font(.system(size: 11, weight: .medium))
-                            .foregroundColor(Color.white.opacity(0.35))
-
-                        Text(periodTime(for: period))
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(Color.white.opacity(0.6))
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-            }
-            .padding(.vertical, 16)
-            .padding(.horizontal, 24)
-
-            Spacer()
+            // Time Period Breakdown - HIDDEN
+//            HStack(spacing: 0) {
+//                ForEach(["Morning", "Afternoon", "Evening"], id: \.self) { period in
+//                    VStack(spacing: 6) {
+//                        Text(period)
+//                            .font(.system(size: 11, weight: .medium))
+//                            .foregroundColor(Color.white.opacity(0.35))
+//
+//                        Text(periodTime(for: period))
+//                            .font(.system(size: 14, weight: .medium))
+//                            .foregroundColor(Color.white.opacity(0.6))
+//                    }
+//                    .frame(maxWidth: .infinity)
+//                }
+//            }
+//            .padding(.vertical, 16)
+//            .padding(.horizontal, 24)
         }
+        .frame(maxHeight: .infinity, alignment: .top)
         .onAppear {
             loadStats()
             // Trigger animation

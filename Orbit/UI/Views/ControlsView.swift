@@ -10,11 +10,14 @@ struct ControlsView: View {
             // Timer Section
             VStack(spacing: 16) {
                 // Status Indicator
-                Text(manager.isRunning ? "FLOW STATE ACTIVE" : "READY TO FLOW")
+                Text(manager.isRunning ? (manager.currentTask?.title.uppercased() ?? "FLOW STATE ACTIVE") : "READY TO FLOW")
                     .font(.system(size: 10, weight: .bold))
                     .tracking(2)
                     .foregroundColor(manager.isRunning ? Theme.Colors.teal : Theme.Colors.textTertiary)
-                    .padding(.top, 20)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .padding(.horizontal, 24)
+                    .padding(.top, 16)
                     .animation(.easeOut(duration: 0.5), value: manager.isRunning)
 
                 // Main Timer with Glow Effect
@@ -34,7 +37,39 @@ struct ControlsView: View {
                         .foregroundColor(.white)
                         .contentTransition(.numericText())
                 }
-                .frame(height: 120)
+                .frame(height: 80)
+                .padding(.bottom, 8)
+
+                // Duration Selector (only when not running and not paused)
+                // COMMENTED OUT: Duration is fixed at 25 minutes
+//                if !manager.isRunning && !manager.isPaused {
+//                    HStack(spacing: 8) {
+//                        ForEach([15, 25, 45, 60], id: \.self) { duration in
+//                            let isSelected = Int(manager.timeLeft) == duration * 60
+//                            Button(action: {
+//                                withAnimation(.easeOut(duration: 0.2)) {
+//                                    manager.setDuration(minutes: duration)
+//                                }
+//                            }) {
+//                                Text("\(duration)m")
+//                                    .font(.system(size: 12, weight: .medium))
+//                                    .foregroundColor(isSelected ? .black : Color.white.opacity(0.6))
+//                                    .frame(maxWidth: .infinity)
+//                                    .frame(height: 32)
+//                                    .background(
+//                                        RoundedRectangle(cornerRadius: 8)
+//                                            .fill(isSelected ? Theme.Colors.teal : Color.white.opacity(0.05))
+//                                    )
+//                                    .overlay(
+//                                        RoundedRectangle(cornerRadius: 8)
+//                                            .stroke(isSelected ? Color.clear : Color.white.opacity(0.1), lineWidth: 1)
+//                                    )
+//                            }
+//                            .buttonStyle(.plain)
+//                        }
+//                    }
+//                    .transition(.opacity.combined(with: .move(edge: .top)))
+//                }
 
                 // Main Action Buttons
                 if manager.isRunning {
@@ -48,16 +83,16 @@ struct ControlsView: View {
                                     .font(.system(size: 14, weight: .semibold))
                                     .tracking(0.5)
                             }
-                            .foregroundColor(.white)
+                            .foregroundColor(Theme.Colors.amber)
                             .frame(maxWidth: .infinity)
                             .frame(height: 50)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color.white.opacity(0.1))
+                                    .fill(Theme.Colors.amber.opacity(0.1))
                             )
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                                    .stroke(Theme.Colors.amber.opacity(0.2), lineWidth: 1)
                             )
                             .contentShape(RoundedRectangle(cornerRadius: 12))
                         }
@@ -72,16 +107,16 @@ struct ControlsView: View {
                                     .font(.system(size: 14, weight: .semibold))
                                     .tracking(0.5)
                             }
-                            .foregroundColor(.white.opacity(0.7))
+                            .foregroundColor(.red.opacity(0.8))
                             .frame(maxWidth: .infinity)
                             .frame(height: 50)
                             .background(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .fill(Color.white.opacity(0.05))
+                                    .fill(Color.red.opacity(0.1))
                             )
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                                    .stroke(Color.red.opacity(0.15), lineWidth: 1)
                             )
                             .contentShape(RoundedRectangle(cornerRadius: 12))
                         }
@@ -89,12 +124,12 @@ struct ControlsView: View {
                     }
                     .transition(.opacity)
                 } else {
-                    // Start Button
+                    // Start/Resume Button
                     Button(action: { manager.toggleTimer() }) {
                         HStack(spacing: 8) {
                             Image(systemName: "play.fill")
                                 .font(.system(size: 16))
-                            Text("Start Focus")
+                            Text(manager.isPaused ? "Resume" : "Start Focus")
                                 .font(.system(size: 14, weight: .semibold))
                                 .tracking(0.5)
                         }
@@ -103,112 +138,54 @@ struct ControlsView: View {
                         .frame(height: 50)
                         .background(
                             RoundedRectangle(cornerRadius: 12)
-                                .fill(Theme.Colors.teal)
+                                .fill(manager.isPaused ? Theme.Colors.amber : Theme.Colors.teal)
                         )
-                        .shadow(color: Theme.Colors.teal.opacity(0.2), radius: 8)
+                        .shadow(color: (manager.isPaused ? Theme.Colors.amber : Theme.Colors.teal).opacity(0.2), radius: 8)
                         .contentShape(RoundedRectangle(cornerRadius: 12))
                     }
                     .buttonStyle(.plain)
                     .transition(.opacity)
                 }
-
-                // Volume Slider
-                VolumeSlider(volume: $manager.volume)
-                    .padding(.top, 8)
             }
             .padding(.horizontal, 24)
-
-            // Soundscapes Section
-            VStack(alignment: .leading, spacing: 16) {
-                HStack {
-                    Text("SOUNDSCAPE")
-                        .font(.system(size: 10, weight: .medium))
-                        .tracking(1.5)
-                        .foregroundColor(Theme.Colors.textSecondary)
-                    Spacer()
-                    Image(systemName: "ellipsis")
-                        .font(.system(size: 14))
-                        .foregroundColor(Theme.Colors.textTertiary)
-                }
-
-                HStack(spacing: 12) {
-                    ForEach(OrbitManager.Soundscape.allCases, id: \.self) { sound in
-                        SoundButton(
-                            type: sound,
-                            isSelected: manager.activeSoundscape == sound,
-                            action: { manager.activeSoundscape = sound }
-                        )
-                        .frame(maxWidth: .infinity)
-                    }
-                }
-            }
-            .padding(.horizontal, 24)
-            .padding(.top, 24)
             .padding(.bottom, 16)
-            .background(
-                Rectangle()
-                    .fill(Color.clear)
-                    .overlay(
-                        Rectangle()
-                            .fill(Color.white.opacity(0.05))
-                            .frame(height: 1),
-                        alignment: .top
-                    )
-            )
 
-            Spacer()
-
-            // Footer - Bio Rhythm
-            VStack(alignment: .leading, spacing: 12) {
-                HStack(spacing: 12) {
-                    ZStack {
-                        Circle()
-                            .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                            .frame(width: 20, height: 20)
-                        Image(systemName: "leaf.fill")
-                            .font(.system(size: 10))
-                            .foregroundColor(Color.white.opacity(0.6))
-                    }
-                    Text("Afternoon Energy Decay")
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(Color.white.opacity(0.9))
-                }
-
-                HStack(alignment: .bottom) {
-                    VStack(alignment: .leading, spacing: 4) {
-                        HStack(spacing: 4) {
-                            Text("Recharge in")
-                                .font(.system(size: 10))
-                                .foregroundColor(Theme.Colors.textTertiary)
-                            Text("27m")
-                                .font(.system(size: 10))
-                                .foregroundColor(Theme.Colors.teal)
-                        }
-                        HStack(spacing: 4) {
-                            Text("Peak focus")
-                                .font(.system(size: 10))
-                                .foregroundColor(Theme.Colors.textTertiary)
-                            Text("1h 17m")
-                                .font(.system(size: 10))
-                                .foregroundColor(Color.white.opacity(0.6))
-                        }
-                    }
-
-                    Spacer()
-
-                    VStack(alignment: .trailing, spacing: 2) {
-                        Text("Vancouver")
-                            .font(.system(size: 10))
-                            .foregroundColor(Color.white.opacity(0.6))
-                        Text("Rain • Sunset 17:40")
-                            .font(.system(size: 10))
-                            .foregroundColor(Theme.Colors.textTertiary)
-                    }
-                }
-            }
-            .padding(16)
-            .background(Theme.Colors.darkPanel)
-            .cornerRadius(12, corners: [.bottomLeft, .bottomRight])
+            // Soundscapes Section - HIDDEN
+//            VStack(alignment: .leading, spacing: 8) {
+//                Text("SOUNDSCAPE")
+//                    .font(.system(size: 10, weight: .medium))
+//                    .tracking(1.5)
+//                    .foregroundColor(Theme.Colors.textSecondary)
+//
+//                HStack(spacing: 12) {
+//                    ForEach(OrbitManager.Soundscape.allCases, id: \.self) { sound in
+//                        SoundButton(
+//                            type: sound,
+//                            isSelected: manager.activeSoundscape == sound,
+//                            action: { manager.activeSoundscape = sound }
+//                        )
+//                        .frame(maxWidth: .infinity)
+//                    }
+//                }
+//
+//                // Volume Slider
+//                VolumeSlider(volume: $manager.volume, manager: manager)
+//                    .padding(.top, 2)
+//            }
+//            .padding(.horizontal, 24)
+//            .padding(.top, 16)
+//            .padding(.bottom, 16)
+//            .background(
+//                Rectangle()
+//                    .fill(Color.clear)
+//                    .overlay(
+//                        Rectangle()
+//                            .fill(Color.white.opacity(0.05))
+//                            .frame(height: 1),
+//                        alignment: .top
+//                    )
+//            )
         }
+        .frame(maxHeight: .infinity, alignment: .top)
     }
 }

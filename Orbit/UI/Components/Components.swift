@@ -61,13 +61,25 @@ struct TabButton: View {
 
 struct VolumeSlider: View {
     @Binding var volume: Double
+    @ObservedObject var manager: OrbitManager
     @State private var isHovering = false
 
     var body: some View {
         HStack(spacing: 12) {
-            Image(systemName: volume > 0.5 ? "speaker.wave.2.fill" : (volume > 0 ? "speaker.wave.1.fill" : "speaker.fill"))
-                .font(.system(size: 14))
-                .foregroundColor(Theme.Colors.textTertiary)
+            Button(action: {
+                manager.isMuted.toggle()
+                if manager.isMuted {
+                    manager.volumeBeforeMute = volume
+                    volume = 0
+                } else {
+                    volume = manager.volumeBeforeMute
+                }
+            }) {
+                Image(systemName: manager.isMuted ? "speaker.slash.fill" : (volume > 0.5 ? "speaker.wave.2.fill" : (volume > 0 ? "speaker.wave.1.fill" : "speaker.fill")))
+                    .font(.system(size: 14))
+                    .foregroundColor(Theme.Colors.textTertiary)
+            }
+            .buttonStyle(.plain)
 
             GeometryReader { geometry in
                 ZStack(alignment: .leading) {
@@ -97,6 +109,9 @@ struct VolumeSlider: View {
                         .onChanged { value in
                             let newVolume = min(max(0, value.location.x / geometry.size.width), 1.0)
                             volume = newVolume
+                            if manager.isMuted && newVolume > 0 {
+                                manager.isMuted = false
+                            }
                         }
                 )
                 .onHover { hovering in
