@@ -8,28 +8,64 @@
 
 /* Begin PBXBuildFile section */
 		A1000001000000000000001 /* OrbitApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000002000000000000001 /* OrbitApp.swift */; };
-		A1000003000000000000001 /* OrbitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000004000000000000001 /* OrbitManager.swift */; };
 		A1000005000000000000001 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000006000000000000001 /* Theme.swift */; };
 		A1000007000000000000001 /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000008000000000000001 /* DataModels.swift */; };
-		A1000009000000000000001 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000010000000000000001 /* Components.swift */; };
-		A1000020000000000000001 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000021000000000000001 /* ControlsView.swift */; };
-		A1000022000000000000001 /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000023000000000000001 /* TasksView.swift */; };
-		A1000024000000000000001 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000025000000000000001 /* StatsView.swift */; };
-		A1000026000000000000001 /* ViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000027000000000000001 /* ViewHelpers.swift */; };
+		B1000001000000000000001 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000002000000000000001 /* DependencyContainer.swift */; };
+		B1000003000000000000001 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000004000000000000001 /* AppConfiguration.swift */; };
+		B1000005000000000000001 /* Soundscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000006000000000000001 /* Soundscape.swift */; };
+		B1000011000000000000001 /* TimerServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000012000000000000001 /* TimerServiceProtocol.swift */; };
+		B1000013000000000000001 /* SessionRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000014000000000000001 /* SessionRepositoryProtocol.swift */; };
+		B1000015000000000000001 /* TaskRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000016000000000000001 /* TaskRepositoryProtocol.swift */; };
+		B1000017000000000000001 /* AudioServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000018000000000000001 /* AudioServiceProtocol.swift */; };
+		B1000019000000000000001 /* SessionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000020000000000000001 /* SessionRepository.swift */; };
+		B1000021000000000000001 /* TaskRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000022000000000000001 /* TaskRepository.swift */; };
+		B1000023000000000000001 /* TimerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000024000000000000001 /* TimerService.swift */; };
+		B1000025000000000000001 /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000026000000000000001 /* AudioService.swift */; };
+		B1000027000000000000001 /* BioRhythmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000028000000000000001 /* BioRhythmService.swift */; };
+		B1000031000000000000001 /* TabButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000032000000000000001 /* TabButton.swift */; };
+		B1000033000000000000001 /* SoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000034000000000000001 /* SoundButton.swift */; };
+		B1000035000000000000001 /* VolumeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000036000000000000001 /* VolumeSlider.swift */; };
+		B1000037000000000000001 /* ProgressRing.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000038000000000000001 /* ProgressRing.swift */; };
+		B1000041000000000000001 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000042000000000000001 /* MainViewModel.swift */; };
+		B1000043000000000000001 /* PopoverContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000044000000000000001 /* PopoverContentView.swift */; };
+		B1000045000000000000001 /* ControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000046000000000000001 /* ControlsView.swift */; };
+		B1000047000000000000001 /* ControlsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000048000000000000001 /* ControlsViewModel.swift */; };
+		B1000049000000000000001 /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000050000000000000001 /* TasksView.swift */; };
+		B1000051000000000000001 /* TasksViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000052000000000000001 /* TasksViewModel.swift */; };
+		B1000053000000000000001 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000054000000000000001 /* StatsView.swift */; };
+		B1000055000000000000001 /* StatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1000056000000000000001 /* StatsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A1000000000000000000001 /* Orbit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orbit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1000002000000000000001 /* OrbitApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbitApp.swift; sourceTree = "<group>"; };
-		A1000004000000000000001 /* OrbitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbitManager.swift; sourceTree = "<group>"; };
 		A1000006000000000000001 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		A1000008000000000000001 /* DataModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
-		A1000010000000000000001 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
-		A1000021000000000000001 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
-		A1000023000000000000001 /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
-		A1000025000000000000001 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
-		A1000027000000000000001 /* ViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewHelpers.swift; sourceTree = "<group>"; };
 		A1000019000000000000001 /* Orbit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Orbit.entitlements; sourceTree = "<group>"; };
+		B1000002000000000000001 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
+		B1000004000000000000001 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		B1000006000000000000001 /* Soundscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Soundscape.swift; sourceTree = "<group>"; };
+		B1000012000000000000001 /* TimerServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerServiceProtocol.swift; sourceTree = "<group>"; };
+		B1000014000000000000001 /* SessionRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRepositoryProtocol.swift; sourceTree = "<group>"; };
+		B1000016000000000000001 /* TaskRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepositoryProtocol.swift; sourceTree = "<group>"; };
+		B1000018000000000000001 /* AudioServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioServiceProtocol.swift; sourceTree = "<group>"; };
+		B1000020000000000000001 /* SessionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRepository.swift; sourceTree = "<group>"; };
+		B1000022000000000000001 /* TaskRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskRepository.swift; sourceTree = "<group>"; };
+		B1000024000000000000001 /* TimerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerService.swift; sourceTree = "<group>"; };
+		B1000026000000000000001 /* AudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
+		B1000028000000000000001 /* BioRhythmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioRhythmService.swift; sourceTree = "<group>"; };
+		B1000032000000000000001 /* TabButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabButton.swift; sourceTree = "<group>"; };
+		B1000034000000000000001 /* SoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundButton.swift; sourceTree = "<group>"; };
+		B1000036000000000000001 /* VolumeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeSlider.swift; sourceTree = "<group>"; };
+		B1000038000000000000001 /* ProgressRing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressRing.swift; sourceTree = "<group>"; };
+		B1000042000000000000001 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		B1000044000000000000001 /* PopoverContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverContentView.swift; sourceTree = "<group>"; };
+		B1000046000000000000001 /* ControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsView.swift; sourceTree = "<group>"; };
+		B1000048000000000000001 /* ControlsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlsViewModel.swift; sourceTree = "<group>"; };
+		B1000050000000000000001 /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
+		B1000052000000000000001 /* TasksViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewModel.swift; sourceTree = "<group>"; };
+		B1000054000000000000001 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		B1000056000000000000001 /* StatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +102,7 @@
 				A1FFFFFB000000000000001 /* App */,
 				A1FFFFFA000000000000001 /* Core */,
 				A1FFFFF9000000000000001 /* Model */,
-				A1FFFFF8000000000000001 /* UI */,
+				C1000001000000000000001 /* Presentation */,
 			);
 			path = Orbit;
 			sourceTree = "<group>";
@@ -75,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				A1000002000000000000001 /* OrbitApp.swift */,
+				B1000002000000000000001 /* DependencyContainer.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -82,8 +119,11 @@
 		A1FFFFFA000000000000001 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				A1000004000000000000001 /* OrbitManager.swift */,
 				A1000006000000000000001 /* Theme.swift */,
+				C1000002000000000000001 /* Configuration */,
+				C1000003000000000000001 /* Domain */,
+				C1000004000000000000001 /* Data */,
+				C1000005000000000000001 /* Services */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -96,32 +136,150 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		A1FFFFF8000000000000001 /* UI */ = {
+		C1000001000000000000001 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				A1FFFFF7000000000000001 /* Components */,
-				A1FFFFF6000000000000001 /* Views */,
+				C1000006000000000000001 /* Components */,
+				C1000007000000000000001 /* Screens */,
 			);
-			path = UI;
+			path = Presentation;
 			sourceTree = "<group>";
 		};
-		A1FFFFF7000000000000001 /* Components */ = {
+		C1000002000000000000001 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				A1000010000000000000001 /* Components.swift */,
+				B1000004000000000000001 /* AppConfiguration.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		C1000003000000000000001 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				C1000008000000000000001 /* Models */,
+				C1000009000000000000001 /* Protocols */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		C1000004000000000000001 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				C1000010000000000000001 /* Repositories */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		C1000005000000000000001 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B1000024000000000000001 /* TimerService.swift */,
+				B1000026000000000000001 /* AudioService.swift */,
+				B1000028000000000000001 /* BioRhythmService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C1000006000000000000001 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C1000011000000000000001 /* Buttons */,
+				C1000012000000000000001 /* Controls */,
 			);
 			path = Components;
 			sourceTree = "<group>";
 		};
-		A1FFFFF6000000000000001 /* Views */ = {
+		C1000007000000000000001 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				A1000021000000000000001 /* ControlsView.swift */,
-				A1000023000000000000001 /* TasksView.swift */,
-				A1000025000000000000001 /* StatsView.swift */,
-				A1000027000000000000001 /* ViewHelpers.swift */,
+				C1000014000000000000001 /* Main */,
+				C1000015000000000000001 /* Controls */,
+				C1000016000000000000001 /* Tasks */,
+				C1000017000000000000001 /* Stats */,
 			);
-			path = Views;
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		C1000008000000000000001 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B1000006000000000000001 /* Soundscape.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C1000009000000000000001 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				B1000012000000000000001 /* TimerServiceProtocol.swift */,
+				B1000014000000000000001 /* SessionRepositoryProtocol.swift */,
+				B1000016000000000000001 /* TaskRepositoryProtocol.swift */,
+				B1000018000000000000001 /* AudioServiceProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		C1000010000000000000001 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				B1000020000000000000001 /* SessionRepository.swift */,
+				B1000022000000000000001 /* TaskRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		C1000011000000000000001 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				B1000032000000000000001 /* TabButton.swift */,
+				B1000034000000000000001 /* SoundButton.swift */,
+			);
+			path = Buttons;
+			sourceTree = "<group>";
+		};
+		C1000012000000000000001 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				B1000036000000000000001 /* VolumeSlider.swift */,
+				B1000038000000000000001 /* ProgressRing.swift */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
+		C1000014000000000000001 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				B1000042000000000000001 /* MainViewModel.swift */,
+				B1000044000000000000001 /* PopoverContentView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		C1000015000000000000001 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				B1000046000000000000001 /* ControlsView.swift */,
+				B1000048000000000000001 /* ControlsViewModel.swift */,
+			);
+			path = Controls;
+			sourceTree = "<group>";
+		};
+		C1000016000000000000001 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				B1000050000000000000001 /* TasksView.swift */,
+				B1000052000000000000001 /* TasksViewModel.swift */,
+			);
+			path = Tasks;
+			sourceTree = "<group>";
+		};
+		C1000017000000000000001 /* Stats */ = {
+			isa = PBXGroup;
+			children = (
+				B1000054000000000000001 /* StatsView.swift */,
+				B1000056000000000000001 /* StatsViewModel.swift */,
+			);
+			path = Stats;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,14 +351,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1000001000000000000001 /* OrbitApp.swift in Sources */,
-				A1000003000000000000001 /* OrbitManager.swift in Sources */,
 				A1000005000000000000001 /* Theme.swift in Sources */,
 				A1000007000000000000001 /* DataModels.swift in Sources */,
-				A1000009000000000000001 /* Components.swift in Sources */,
-				A1000020000000000000001 /* ControlsView.swift in Sources */,
-				A1000022000000000000001 /* TasksView.swift in Sources */,
-				A1000024000000000000001 /* StatsView.swift in Sources */,
-				A1000026000000000000001 /* ViewHelpers.swift in Sources */,
+				B1000001000000000000001 /* DependencyContainer.swift in Sources */,
+				B1000003000000000000001 /* AppConfiguration.swift in Sources */,
+				B1000005000000000000001 /* Soundscape.swift in Sources */,
+				B1000011000000000000001 /* TimerServiceProtocol.swift in Sources */,
+				B1000013000000000000001 /* SessionRepositoryProtocol.swift in Sources */,
+				B1000015000000000000001 /* TaskRepositoryProtocol.swift in Sources */,
+				B1000017000000000000001 /* AudioServiceProtocol.swift in Sources */,
+				B1000019000000000000001 /* SessionRepository.swift in Sources */,
+				B1000021000000000000001 /* TaskRepository.swift in Sources */,
+				B1000023000000000000001 /* TimerService.swift in Sources */,
+				B1000025000000000000001 /* AudioService.swift in Sources */,
+				B1000027000000000000001 /* BioRhythmService.swift in Sources */,
+				B1000031000000000000001 /* TabButton.swift in Sources */,
+				B1000033000000000000001 /* SoundButton.swift in Sources */,
+				B1000035000000000000001 /* VolumeSlider.swift in Sources */,
+				B1000037000000000000001 /* ProgressRing.swift in Sources */,
+				B1000041000000000000001 /* MainViewModel.swift in Sources */,
+				B1000043000000000000001 /* PopoverContentView.swift in Sources */,
+				B1000045000000000000001 /* ControlsView.swift in Sources */,
+				B1000047000000000000001 /* ControlsViewModel.swift in Sources */,
+				B1000049000000000000001 /* TasksView.swift in Sources */,
+				B1000051000000000000001 /* TasksViewModel.swift in Sources */,
+				B1000053000000000000001 /* StatsView.swift in Sources */,
+				B1000055000000000000001 /* StatsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

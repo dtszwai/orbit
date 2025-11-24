@@ -1,19 +1,19 @@
 import SwiftUI
 
-// MARK: - Design System
 struct Theme {
     static let width: CGFloat = 340
-    static let height: CGFloat = 400
+    static let minHeight: CGFloat = 200
+    static let maxHeight: CGFloat = 600
 
     struct Colors {
         static let background = Color(hex: "121212")
         static let panel = Color(hex: "1A1A1A")
         static let darkPanel = Color(hex: "0A0A0A")
         static let mediumPanel = Color(hex: "2A2A2A")
-        static let teal = Color(hex: "2DD4BF") // Focus
-        static let amber = Color(hex: "F59E0B") // Relax
-        static let purple = Color(hex: "C084FC") // Spatial
-        static let green = Color(hex: "22C55E") // Natural
+        static let teal = Color(hex: "2DD4BF")
+        static let amber = Color(hex: "F59E0B")
+        static let purple = Color(hex: "C084FC")
+        static let green = Color(hex: "22C55E")
         static let textPrimary = Color.white.opacity(0.9)
         static let textSecondary = Color.white.opacity(0.5)
         static let textTertiary = Color.white.opacity(0.3)
@@ -38,7 +38,6 @@ struct Theme {
     }
 }
 
-// Helper for Hex Colors
 extension Color {
     init(hex: String) {
         let scanner = Scanner(string: hex)
