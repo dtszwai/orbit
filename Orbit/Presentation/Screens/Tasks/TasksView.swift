@@ -23,7 +23,7 @@ struct TasksView: View {
     private var header: some View {
         HStack {
             Text("TASKS")
-                .font(.system(size: 10, weight: .bold))
+                .font(.system(size: 12, weight: .bold))
                 .tracking(1.5)
                 .foregroundColor(Theme.Colors.textTertiary)
             Spacer()
@@ -69,7 +69,7 @@ struct TasksView: View {
                         viewModel.addTask()
                     }
                 }
-                .font(.system(size: 12, weight: .medium))
+                .font(.system(size: 14, weight: .medium))
                 .foregroundColor(Theme.Colors.teal)
                 .padding(.horizontal, 16)
                 .padding(.vertical, 12)
@@ -103,7 +103,7 @@ struct TasksView: View {
             .frame(maxWidth: .infinity)
 
             Text("min")
-                .font(.system(size: 12))
+                .font(.system(size: 14))
                 .foregroundColor(Theme.Colors.textTertiary)
         }
         .padding(12)
@@ -151,7 +151,7 @@ struct TasksView: View {
                 .font(.system(size: 14, weight: .medium))
                 .foregroundColor(Color.white.opacity(0.3))
             Text("Tap + to add your first task")
-                .font(.system(size: 12))
+                .font(.system(size: 14))
                 .foregroundColor(Color.white.opacity(0.15))
         }
         .padding(.vertical, 40)
@@ -161,7 +161,7 @@ struct TasksView: View {
         VStack(spacing: 8) {
             HStack {
                 Text("COMPLETED")
-                    .font(.system(size: 10, weight: .bold))
+                    .font(.system(size: 12, weight: .bold))
                     .tracking(1.5)
                     .foregroundColor(Theme.Colors.textTertiary)
                 Spacer()
@@ -245,11 +245,11 @@ struct TaskRow: View {
     private var taskInfo: some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(task.title)
-                .font(.system(size: 14, weight: .medium))
+                .font(.system(size: 15, weight: .medium))
                 .foregroundColor(task.isCompleted ? Color.white.opacity(0.4) : Color.white.opacity(0.9))
                 .strikethrough(task.isCompleted)
             Text("\(task.durationMinutes) min")
-                .font(.system(size: 10))
+                .font(.system(size: 12))
                 .foregroundColor(Theme.Colors.textTertiary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)

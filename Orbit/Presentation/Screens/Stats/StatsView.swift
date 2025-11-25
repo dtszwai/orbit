@@ -54,7 +54,7 @@ struct StatsView: View {
             Spacer()
 
             Text(viewModel.weekDateRange)
-                .font(.system(size: 13, weight: .medium))
+                .font(.system(size: 15, weight: .medium))
                 .foregroundColor(Color.white.opacity(0.6))
                 .contentTransition(.numericText())
 
@@ -85,7 +85,7 @@ struct StatsView: View {
     private var totalFocusDisplay: some View {
         VStack(spacing: 4) {
             Text(displayLabel)
-                .font(.system(size: 10, weight: .semibold))
+                .font(.system(size: 12, weight: .semibold))
                 .tracking(1.2)
                 .foregroundColor(Color.white.opacity(0.4))
                 .animation(.easeOut(duration: AppConfiguration.Animation.standardDuration), value: displayLabel)
@@ -135,7 +135,7 @@ struct StatsView: View {
             HStack(spacing: 0) {
                 ForEach(viewModel.dailyData) { data in
                     Text(data.dayLabel)
-                        .font(.system(size: 9, weight: data.isToday ? .bold : .medium))
+                        .font(.system(size: 12, weight: data.isToday ? .bold : .medium))
                         .foregroundColor(data.isToday ? Theme.Colors.teal : Color.white.opacity(0.35))
                         .frame(maxWidth: .infinity)
                 }

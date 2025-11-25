@@ -29,7 +29,7 @@ struct SoundButton: View {
                 .animation(.easeOut(duration: 0.3), value: isSelected)
 
                 Text(soundscape.label)
-                    .font(.system(size: 10, weight: .medium))
+                    .font(.system(size: 12, weight: .medium))
                     .tracking(0.5)
                     .foregroundColor(isSelected ? .white : .white.opacity(0.3))
             }

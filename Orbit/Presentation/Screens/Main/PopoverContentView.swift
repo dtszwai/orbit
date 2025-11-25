@@ -47,8 +47,19 @@ struct PopoverContentView: View {
         .padding(.vertical, AppConfiguration.UI.verticalPadding)
     }
 
+    private var focusModeBinding: Binding<Bool> {
+        Binding(
+            get: { viewModel.container.focusModeService.isEnabled },
+            set: { viewModel.container.focusModeService.isEnabled = $0 }
+        )
+    }
+
     private var settingsMenu: some View {
         Menu {
+            Toggle("Sync with macOS Focus", isOn: focusModeBinding)
+
+            Divider()
+
             Button("Generate Mock Data") {
                 viewModel.generateMockData()
             }

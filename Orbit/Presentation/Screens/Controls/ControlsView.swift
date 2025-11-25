@@ -21,7 +21,7 @@ struct ControlsView: View {
 
     private var statusIndicator: some View {
         Text(viewModel.statusText)
-            .font(.system(size: 10, weight: .bold))
+            .font(.system(size: 12, weight: .bold))
             .tracking(2)
             .foregroundColor(viewModel.isRunning ? Theme.Colors.teal : Theme.Colors.textTertiary)
             .lineLimit(1)
@@ -128,7 +128,7 @@ private struct ActionButton: View {
                 Image(systemName: icon)
                     .font(.system(size: 16))
                 Text(title)
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.system(size: 15, weight: .semibold))
                     .tracking(0.5)
             }
             .foregroundColor(foregroundColor)

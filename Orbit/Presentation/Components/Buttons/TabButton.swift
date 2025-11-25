@@ -10,7 +10,7 @@ struct TabButton: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(.system(size: 12, weight: .medium))
+                .font(.system(size: 14, weight: .medium))
                 .padding(.vertical, 6)
                 .padding(.horizontal, 12)
                 .background(backgroundColor)

@@ -8,6 +8,7 @@ final class DependencyContainer: ObservableObject {
     let timerService: TimerService
     let audioService: AudioService
     let bioRhythmService: BioRhythmService
+    let focusModeService: FocusModeService
 
     private(set) var sessionRepository: SessionRepository?
     private(set) var taskRepository: TaskRepository?
@@ -20,8 +21,27 @@ final class DependencyContainer: ObservableObject {
         self.audioService = AudioService()
         self.bioRhythmService = BioRhythmService()
         self.timerService = TimerService()
+        self.focusModeService = FocusModeService()
 
         timerService.objectWillChange
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
+            .store(in: &cancellables)
+
+        // Observe timer completion to deactivate Focus mode
+        timerService.$isRunning
+            .combineLatest(timerService.$isPaused)
+            .sink { [weak self] isRunning, isPaused in
+                guard let self = self else { return }
+                // When timer stops (not running and not paused), deactivate focus
+                if !isRunning && !isPaused && self.focusModeService.isFocusActive {
+                    self.focusModeService.deactivateFocus()
+                }
+            }
+            .store(in: &cancellables)
+
+        focusModeService.objectWillChange
             .sink { [weak self] _ in
                 self?.objectWillChange.send()
             }
@@ -36,12 +56,14 @@ final class DependencyContainer: ObservableObject {
     func startFocusSession(duration: TimeInterval? = nil) {
         let sessionDuration = duration ?? AppConfiguration.Timer.defaultDuration
         timerService.start(duration: sessionDuration)
+        focusModeService.activateFocus()
     }
 
     func startTaskSession(task: TaskItem) {
         currentTask = task
         let duration = TimeInterval(task.durationMinutes * 60)
         timerService.start(duration: duration)
+        focusModeService.activateFocus()
     }
 
     func pauseSession() {
@@ -55,6 +77,7 @@ final class DependencyContainer: ObservableObject {
         }
         timerService.stop()
         currentTask = nil
+        focusModeService.deactivateFocus()
     }
 
     func toggleTimer() {

@@ -47,7 +47,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSPopoverDelegate {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         if let button = statusItem.button {
-            button.image = NSImage(systemSymbolName: "leaf", accessibilityDescription: "Orbit")
+            let image = NSImage(systemSymbolName: "leaf", accessibilityDescription: "Orbit")
+            image?.isTemplate = true
+            button.image = image
             button.action = #selector(handleClick)
             button.sendAction(on: [.leftMouseUp, .rightMouseUp])
             button.target = self
@@ -98,19 +100,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSPopoverDelegate {
         let isPaused = container.timerService.isPaused
 
         if isRunning || isPaused {
-            button.image = NSImage(systemSymbolName: "leaf.fill", accessibilityDescription: "Orbit")
+            let image = NSImage(systemSymbolName: "leaf.fill", accessibilityDescription: "Orbit")
+            image?.isTemplate = true
+            button.image = image
             button.title = " \(container.timerService.timeFormatted)"
         } else {
-            button.image = NSImage(systemSymbolName: "leaf", accessibilityDescription: "Orbit")
+            let image = NSImage(systemSymbolName: "leaf", accessibilityDescription: "Orbit")
+            image?.isTemplate = true
+            button.image = image
             button.title = ""
-        }
-
-        if isRunning {
-            button.contentTintColor = NSColor(Theme.Colors.teal)
-        } else if isPaused {
-            button.contentTintColor = NSColor(Theme.Colors.amber)
-        } else {
-            button.contentTintColor = nil
         }
     }
 
